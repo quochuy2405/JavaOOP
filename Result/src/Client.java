@@ -180,7 +180,7 @@ public class Client {
 
 	public void readStudents() {
 		
-		try (BufferedReader br = new BufferedReader(new FileReader("DanhSachSV.csv"))) {
+		try (BufferedReader br = new BufferedReader(new FileReader("Students.csv"))) {
 		    String line;
 		    while ((line = br.readLine()) != null) {
 		    	
