@@ -14,11 +14,11 @@ public class Student_Common extends Student  {
 
     //  calculating the weighted average of the student's performance in the assessment components
     public double  getOveralMark() {
-   	 return Student_CM.getOveralMark();
+   	 return Student_CM.getOveralMark();// truy xuát dữ liệu  OveralMark of student
     }
     
     public String getFinalGrade() {
-    	return Student_CM.getFinalGrade();
+    	return Student_CM.getFinalGrade();// truy xuát dữ liệu  FinalGrade of student
     }
    
     // Override reportGrade method to return student common information
@@ -26,6 +26,7 @@ public class Student_Common extends Student  {
     public String reportGrade()
     {
         String showGrade = super.reportGrade(); // super keyword to call the toString method from the superclass (parent class_
+        // sử dụng toán tử 3 ngôi để check unitLevel
         showGrade +=
                     "\n Unit Number: " + " " + unitID + " " +
                     "\n Unit Level: " +(unitLevel==1?"C":"M") + " " +

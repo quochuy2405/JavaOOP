@@ -16,7 +16,7 @@ public class Unit_Major extends Unit {
     }
 
     Unit_Major(double assignmentMark, double projectMark, double weeklyLab, double finalMajor) { // Parameterized constructor
-        this.majorEnrollment=getMajorEnrollment();
+        this.majorEnrollment=getMajorEnrollment();// lấy dữ liệu đã config sẵn cho loại là Major
         this.assignmentMark = assignmentMark;
         this.projectMark = projectMark;
         this.weeklyLab = weeklyLab;
@@ -45,10 +45,10 @@ public class Unit_Major extends Unit {
 
     double getOveralMark() {
     	calculateWeightedAvg(); // sẽ tính lại overalMark trước khi đưa lên cho Student Major
-        return overalMark;
+        return overalMark; // sau khi tính overalMark thì trả vê giá trị
     }
     public String getFinalGrade() {
     	calculateWeightedAvg();// sẽ tính lại finalGrade trước khi đưa lên cho Student Major
-		return finalGrade;
+		return finalGrade;// sau khi tính finalGrade thì trả vê giá trị
 	}
 }

@@ -16,7 +16,7 @@ public class Unit_Common extends Unit {
     }
 
    public Unit_Common(double asm1, double asm2, double pracWork, double finalExam) {
-        this.commonEnrollment = getCommonEnrollment();
+        this.commonEnrollment = getCommonEnrollment();// lấy dữ liệu đã config sẵn cho loại là Common
         this.assignment1 = asm1;
         this.assignment2 = asm2;
         this.practicalWork = pracWork;
@@ -46,10 +46,10 @@ public class Unit_Common extends Unit {
 
     double getOveralMark() { // handling exception
     	calculateWeightedAvg();// sẽ tính lại overalMark trước khi đưa lên cho Student Common
-        return overalMark;
+        return overalMark;// sau khi tính overalMark thì trả vê giá trị
     }
     public String getFinalGrade() {
     	calculateWeightedAvg();// sẽ tính lại finalGrade trước khi đưa lên cho Student Common
-		return finalGrade;
+		return finalGrade;// sau khi tính finalGrade thì trả vê giá trị
 	}
 }

@@ -10,14 +10,15 @@ public class Student_Major extends Student {
                   double assignmentMark, double projectMark, double weeklyLab, double finalMajor) { // Parameterized constructor
     	
     		super(unitID, unitLevel, firstName, lastName, StudentNo, day, month, year);
-    		Student_MJ = new Unit_Major(assignmentMark ,projectMark ,weeklyLab,finalMajor);
+    		Student_MJ = new Unit_Major(assignmentMark ,projectMark ,weeklyLab,finalMajor);// khởi tạo giá trịc cho Unit_Major class và sau đó có thể sử dụng 
+    		//Unit_Major Student_MJ để truy suất giá trị ra đế sử dụng
     }
      public double  getOveralMark() {
-    	 return Student_MJ.getOveralMark();
+    	 return Student_MJ.getOveralMark();// get data OveralMark
      }
 
 	public String  getFinalGrade() {
-		 return Student_MJ.getFinalGrade();
+		 return Student_MJ.getFinalGrade();// get data getFinalGrade
 	}
 	
 	
@@ -25,7 +26,8 @@ public class Student_Major extends Student {
     @Override
     public String reportGrade() // this is automatically called when the main method print out the instance of object created
     {   
-        String showGrade = super.reportGrade();
+        String showGrade = super.reportGrade();// kế thừa lại reportGrade của student
+        // sử dụng toán tử 3 ngôi để check unitLevel
         showGrade +="\n Unit Number: " + " " + unitID + " " +
                     "\n Unit Level: " + (unitLevel<2?"C":"M") + " " +
                     "\n Assignment: " + Student_MJ.assignmentMark +
