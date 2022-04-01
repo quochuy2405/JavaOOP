@@ -1,11 +1,12 @@
-public class Student_Major extends Student {
-    final Unit_Major Student_MJ;
-
+public class Student_Major extends Student { // không nhầm kế thừa và gọi khởi tạo đối tượng
+    final Unit_Major Student_MJ;// variable // final
+   
     Student_Major() { // Default constructor
         super();
-        Student_MJ = new Unit_Major();
+        Student_MJ = new Unit_Major();// khởi tạo đối tượng
+       
     }
-
+  
     Student_Major(String unitID, int unitLevel, String firstName, String lastName, long StudentNo,int day, int month, int year,
                   double assignmentMark, double projectMark, double weeklyLab, double finalMajor) { // Parameterized constructor
     	
@@ -28,8 +29,10 @@ public class Student_Major extends Student {
     {   
         String showGrade = super.reportGrade();// kế thừa lại reportGrade của student
         // sử dụng toán tử 3 ngôi để check unitLevel
+        // đúng ? trả về cái đúng : trả về cái sai
+         
         showGrade +="\n Unit Number: " + " " + unitID + " " +
-                    "\n Unit Level: " + (unitLevel<2?"C":"M") + " " +
+                    "\n Unit Level: " + (unitLevel<2?"C":"M") + " " + 
                     "\n Assignment: " + Student_MJ.assignmentMark +
                     "\n Project Mark: " + Student_MJ.projectMark +
                     "\n Practical Work: " + Student_MJ.weeklyLab +
@@ -42,7 +45,7 @@ public class Student_Major extends Student {
     }
     @Override
     public String MakeStringForCSV() {  // tạo ra để export đơn giản hơn
-   	 String ForCSV=(unitLevel==1?"C":"M")+","+super.MakeStringForCSV()+","+unitID +","+unitLevel + ","
+   	 String ForCSV=(unitLevel<2?"C":"M")+","+super.MakeStringForCSV()+","+unitID +","+unitLevel + ","
    			 		+Student_MJ.assignmentMark+","+Student_MJ.projectMark+","+
    			 		Student_MJ.weeklyLab +"," +Student_MJ.finalMajor +"," 
    			 		+ getOveralMark() +"," + getFinalGrade();

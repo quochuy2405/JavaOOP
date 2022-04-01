@@ -1,6 +1,6 @@
 public class Unit_Major extends Unit {
 
-    String unitID = "ICT159";
+    String unitID = "ICT167";
     int unitLevel = 2;
     double assignmentMark;
     double projectMark;
@@ -30,17 +30,21 @@ public class Unit_Major extends Unit {
         overalMark += projectMark * 0.35; // the project work is worth 35%
         overalMark += weeklyLab * 0.10; // the weekly work is worth 15%
         overalMark += finalMajor * 0.40; //the final work is worth 40% of the final grade.
-
-        if(overalMark >= 80.0) //  An overall mark of 80 or higher is an HD
-            finalGrade = "HD";
-        else if(overalMark >= 70.0) // overall mark of 70 or higher (but less than 80) is a D
-            finalGrade = "D";
-        else if(overalMark >= 60.0) // an overall mark of 60 or higher (but less than 70) is a C
-            finalGrade = "C";
-        else if(overalMark >= 50.0) // an overall mark of 50 or higher (but less than 60) is a P
-            finalGrade = "P";
-        else
-            finalGrade = "N"; // and an overall mark below 50 is an N
+       if (overalMark >=0)
+       {
+    	   if(overalMark >= 80.0) //  An overall mark of 80 or higher is an HD
+               finalGrade = "HD";
+           else if(overalMark >= 70.0) // overall mark of 70 or higher (but less than 80) is a D
+               finalGrade = "D";
+           else if(overalMark >= 60.0) // an overall mark of 60 or higher (but less than 70) is a C
+               finalGrade = "C";
+           else if(overalMark >= 50.0) // an overall mark of 50 or higher (but less than 60) is a P
+               finalGrade = "P";
+           else
+               finalGrade = "N"; // and an overall mark below 50 is an N
+       }
+        else 
+        	finalGrade= getFinalGrade();
     }
 
     double getOveralMark() {

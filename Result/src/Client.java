@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Client {
@@ -17,40 +18,44 @@ public class Client {
     int menu() {
         System.out.print("\n\n ********** MENU ********** ");
         System.out.print("\n\t 1 - Quit " +
-                "\n\t 2 - Remove Student" +
-                "\n\t 3 - Output all details  " +
-                "\n\t 4 - Common Student with Below or Above average" + 
-                "\n\t 5 - Report student grade by StudentNo" +
-                "\n\t 6 -  Sort ArrayList by order of the StudentNo" +
-                "\n\t 7 - Output the sorted ArrayList to CSV" +
+        		"\n\t 2 - Add Student" +
+                "\n\t 3 - Remove Student" +
+                "\n\t 4 - Output all details  " +
+                "\n\t 5 - Common Student with Below or Above average" + 
+                "\n\t 6 - Report student grade by StudentNo" +
+                "\n\t 7 -  Sort ArrayList by order of the StudentNo" +
+                "\n\t 8 - Output the sorted ArrayList to CSV" +
                 "\n\t\t What is your choice? \n\n");
         return sc.nextInt();
     }
 
     public static void main(String[] s) {
         Client sr = new Client();
-        sr.readStudents();
+        
         do {
             switch (sr.menu()) {
                 case 1:
                     System.exit(0);
                 case 2:
+                	 sr.readStudents();
+                      break;
+                case 3:
                     sr.removeStudent();
                     break;
-                case 3:
+                case 4:
                     sr.showAllStudent();
                     
                     break;	
-                case 4:
+                case 5:
 					 sr.showCommonStudentBelowAboveAvg();
                     break;
-                case 5:
+                case 6:
                     sr.showReportThGradeStudent();
                     break;
-                case 6:
+                case 7:
 					sr.SortListStudentByIDNumber();
                     break;
-                case 7:
+                case 8:
                 	sr.OutputSortedArrayListSToCSV();
                     break;
 
@@ -63,11 +68,11 @@ public class Client {
 	public void showCommonStudentBelowAboveAvg() {
 		int CountBelowAVG=0;// khởi tạo biến
 		int CountAboveAVG=0;
-		for (Student student : students) {
-			if(student.getClass()==Student_Major.class) {
-				Student_Major st = (Student_Major)student;
-				if(st.getOveralMark()>50.0) { // kiểm tra xem có trên trung bình hay không
-					CountAboveAVG++; // tùy theo lại thì tiến hành tăng giá trị
+		for (Student st : students) { // gán lần lượt từng student vào trong st 
+			if(st.getClass()==Student_Common.class) {
+				Student_Common st_common = (Student_Common)st;// ép kiểu// st kiểu Student// nên phải ép kiểu về student_Common
+				if(st_common.getOveralMark()>50.0) { // kiểm tra xem có trên trung bình hay không
+					CountAboveAVG++; // tùy theo lại thì tiến hành tăng giá trị +1
 				}
 				else {
 					CountBelowAVG++;
@@ -83,7 +88,7 @@ public class Client {
         FileWriter fw;
 		try {
 			fw = new FileWriter(file);// tiến hành tạo file
-			 BufferedWriter bw = new BufferedWriter(fw);// tiến hành tạo buffer
+			 BufferedWriter bw = new BufferedWriter(fw);// tiến hành tạo buffer// bố nhớ đệm 
 				for (Student student : students) {
 					bw.write(student.MakeStringForCSV());// viết giữ liệu đã được custom sẵn để thêm vào file csv
 		        	bw.newLine();
@@ -98,14 +103,13 @@ public class Client {
 	public void SortListStudentByIDNumber() { 
 		for(int i=0;i<students.size()-1;i++) // Sort bong bóng
 		{
-			for(int j=i;j<students.size();j++)
+			for(int j=i+1;j<students.size();j++)
 			{
-			    if(students.get(i).getStudentNo()>students.get(j).getStudentNo())
+			    if(students.get(i).getStudentNo()>students.get(j).getStudentNo())// học thuatan toán bubble
 			    	// check nếu đúng trường hợp
 			    {   
 			    	var temp=students.get(i); // đổi chỗ nếu đúng trường hợp theo thuật tuấn bubble sort
-			    	
-			    	students.set(i, students.get(j));
+			    	students.set(i, students.get(j)); // swap
 			    	students.set(j, temp);
 			    }
 			}
@@ -137,7 +141,9 @@ public class Client {
     	
     }
 
-	public void showAllStudent() {
+	public void showAllStudent() { 
+		
+		
 		for (Student student : students) {
 			System.out.println(student.reportGrade());// in toàn bộ student ra bằng foreach
 		}
@@ -145,9 +151,10 @@ public class Client {
 	}
 
 	public void removeStudent() {
+		
 		System.out.print("\nEnter ID Number:");
 		long StudentID= sc.nextLong();  // nhập Id vào
-		final Student StudentRemove =  new Student();
+		Student StudentRemove =  new Student();// biến nhớ 
 		int index = 0; //lưu nhớ lại vị trí của student trong mảng
 		for (Student student : students) {
 			if(student.getStudentNo()==StudentID) // kiểm tra xem có đúng student Id không
@@ -156,14 +163,12 @@ public class Client {
 				String confirm= sc.next();
 			     if(confirm.equals("yes")||confirm.equals("Yes")||confirm.equals("Y")||confirm.equals("y"))
 			     {
-			    	 StudentRemove.setStudentNo(student.getStudentNo());// lưu thông tin vào trước khi xóa
-					 StudentRemove.setLastName(student.getLastName());
-				     StudentRemove.setFirstName(student.getFirstName());
+			    	 StudentRemove=student;
 				     students.remove(index);// vì nhận được index chính student cần xóa và tiến hành xóa khỏi mảng
 				     break;
 			     }
 			} 
-			index++;
+			index++;// không tìm được thì tăng lên 
 		}
 					    
 		if(StudentRemove.getStudentNo()!=0) // kiểm tra student có tồn tại k có thì in ra không thì in notfound
@@ -203,8 +208,8 @@ public class Client {
 		        	double asm2=Double.parseDouble(values[8]);
 		        	double pracWork=Double.parseDouble(values[9]);
 		            double finalExam=Double.parseDouble(values[10]);
-		        	st= new Student_Common("1",1,FisrtName,LastName,StudentNo,Day,Month,Year,asm1,asm2,pracWork,finalExam);   	 
-		        	 
+		        	st= new Student_Common(FisrtName,LastName,StudentNo,Day,Month,Year,asm1,asm2,pracWork,finalExam);   	 
+		        	// vì st là cha của Student_Common nên theo tính đa hình thì có thể khỏi tạo được hàm con
 		        }
 		        else {
 		        	// gán thêm các thông tin cần thiết
@@ -212,14 +217,14 @@ public class Client {
 		        	double projectMark=Double.parseDouble(values[8]);
 		        	double weeklyLab=Double.parseDouble(values[9]);
 		            double finalMajor=Double.parseDouble(values[10]);
-		        	 st= new Student_Major("1",1,FisrtName,LastName,StudentNo,Day,Month,Year,assignmentMark,projectMark,weeklyLab,0);
+		        	 st= new Student_Major(FisrtName,LastName,StudentNo,Day,Month,Year,assignmentMark,projectMark,weeklyLab,0);
 		        }
 		    	// sau khi có dữ liệu thì thêm st vào  ArrayList
 		        students.add(st);	
 		    }
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (IOException e) {// input out push student
 			e.printStackTrace();
 		}
 		

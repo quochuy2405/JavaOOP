@@ -10,7 +10,7 @@ public class Student
    public Student() { // default constructor
       firstName = "";
       lastName = "";
-      day = month = year = (int) (StudentNo = 0);
+      day = month = year =(int)(StudentNo = 0);
    }
    public Student(String unitID, int unitLevel, String firstName, String lastName, long StudentNo, int day, int month, int year) { // constructor with parameter and a set of values in curly braces
       this.firstName = firstName;
